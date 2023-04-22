@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -18,6 +19,15 @@ class SubtractionCommandHandlerTest {
     
     @Mock
     private SubtractionUseCase subtractionUseCase;
+    
+    @Mock
+    private CommandBus commandBus;
+    
+    
+    @Test
+    void shouldSubscribeWhenInstantiated(){
+        verify(this.commandBus, times(1)).subscribe(undertest, SubtractionCommand.class);
+    }
     
     @Test
     void shouldAcceptSubtractCommand(){
