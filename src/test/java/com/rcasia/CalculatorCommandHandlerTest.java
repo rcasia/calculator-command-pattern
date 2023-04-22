@@ -20,6 +20,9 @@ class CalculatorCommandHandlerTest {
     @Mock
     private SumUseCase sumUseCase;
     
+    @Mock
+    private SubtractionUseCase subtractionUseCase;
+
     @Test
     void shouldAcceptSumCommand(){
         // given
@@ -34,5 +37,20 @@ class CalculatorCommandHandlerTest {
         // then
         verify(this.sumUseCase, times(1)).sum(5,5);
         
+    }
+    
+    @Test
+    void shouldAcceptSubtractCommand(){
+        // given
+        SubtractionCommand subtractionCommand = SubtractionCommand.builder()
+                .firstNumber(10)
+                .secondNumber(5)
+                .build();
+        
+        // when
+        this.undertest.handle(subtractionCommand);
+        
+        // then
+        verify(this.subtractionUseCase, times(1)).subtract(10, 5);
     }
 }
