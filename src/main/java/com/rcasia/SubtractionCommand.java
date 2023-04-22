@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class SubtractionCommand {
+public class SubtractionCommand implements Command {
     
     private int firstNumber;
     private int secondNumber;
