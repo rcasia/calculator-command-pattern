@@ -1,5 +1,6 @@
 package com.rcasia;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -7,6 +8,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CalculatorTest {
+    
+    private Calculator calculator;
+    
+    @BeforeEach
+    void setUp(){
+        this.calculator = new Calculator();
+    }
     
     @ParameterizedTest
     @CsvSource({
@@ -17,13 +25,12 @@ class CalculatorTest {
             "90,13,103"
     })
     void sumAPlusBEqualsC(int a, int b, int expected){
-        // given
-        Calculator calculator = new Calculator();
-        
         // when
-        calculator.sum(a);
-        calculator.sum(b);
-        int actual = calculator.getCurrent();
+        this.calculator
+                .sum(a)
+                .sum(b);
+        
+        int actual = this.calculator.getCurrent();
         
         // then
         assertThat(actual).isEqualTo(expected);

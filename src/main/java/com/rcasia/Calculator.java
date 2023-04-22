@@ -4,8 +4,9 @@ public class Calculator {
     
     private int current = 0;
     
-    public void sum(int a) {
+    public Calculator sum(int a) {
         this.current +=  a;
+        return this;
     }
 
     public int getCurrent() {
