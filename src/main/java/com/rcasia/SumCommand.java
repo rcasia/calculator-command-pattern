@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class SumCommand {
+public class SumCommand implements CalculatorCommand {
     
     private int firstNumber;
     

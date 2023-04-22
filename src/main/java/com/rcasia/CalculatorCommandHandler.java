@@ -2,7 +2,9 @@ package com.rcasia;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+import java.util.HashSet;
+import java.util.Set;
+
 public class CalculatorCommandHandler {
 
     private SumUseCase sumUseCase;
