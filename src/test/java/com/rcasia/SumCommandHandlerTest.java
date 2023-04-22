@@ -19,6 +19,14 @@ class SumCommandHandlerTest {
     @Mock
     private SumUseCase sumUseCase;
     
+    @Mock
+    private CommandBus commandBus;
+
+    @Test
+    void shouldSubscribeWhenInstantiated(){
+        verify(this.commandBus, times(1)).subscribe(undertest, SumCommand.class);
+    }
+    
     @Test
     void shouldAcceptSumCommand(){
         // given

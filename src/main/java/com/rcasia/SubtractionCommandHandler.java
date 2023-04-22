@@ -1,6 +1,9 @@
 package com.rcasia;
 
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SubtractionCommandHandler implements CommandHandler {
     
     private static final Class<? extends Command> COMMAND_CLASS = SubtractionCommand.class;
