@@ -14,7 +14,7 @@ public class CommandBus {
         this.handlers.put(command, commandHandler);
     }
 
-    public void route(Command command) {
+    public void execute(Command command) {
         var handler = this.handlers.get(command.getClass());
         
         handler.handle(command);

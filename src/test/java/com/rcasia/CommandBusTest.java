@@ -1,9 +1,6 @@
 package com.rcasia;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,7 +32,7 @@ public class CommandBusTest {
         commandBus.subscribe(sumCommandHandler, SumCommand.class);
         
         // when
-        commandBus.route(command);
+        commandBus.execute(command);
         
         // then
         verify(sumCommandHandler, times(1)).handle(command);
