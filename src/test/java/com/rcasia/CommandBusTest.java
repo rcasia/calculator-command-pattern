@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 
 public class CommandBusTest {
@@ -14,13 +16,30 @@ public class CommandBusTest {
     void shouldSubscribeHandlersToCommands(){
         // given
         CommandBus commandBus = new CommandBus();
+        SumCommandHandler sumCommandHandler =  mock(SumCommandHandler.class);
         
         // when
-        commandBus.subscribe(CalculatorCommand.class, CalculatorCommandHandler.class);
+        commandBus.subscribe(sumCommandHandler, Command.class);
         var actual = commandBus.getHandlers();
         
         // then
-        assertThat(actual.get(CalculatorCommand.class)).isNotNull();
+        assertThat(actual.get(Command.class)).isNotNull();
+    }
+    
+    @Test
+    void shouldRouteCommands(){
+        // given
+        CommandBus commandBus = new CommandBus();
+        SumCommandHandler sumCommandHandler =  mock(SumCommandHandler.class);
+        SumCommand command = SumCommand.builder().build();
+        commandBus.subscribe(sumCommandHandler, SumCommand.class);
+        
+        // when
+        commandBus.route(command);
+        
+        // then
+        verify(sumCommandHandler, times(1)).handle(command);
+        
     }
     
 }

@@ -1,6 +1,5 @@
 package com.rcasia;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -8,10 +7,16 @@ import java.util.HashMap;
 @Getter
 public class CommandBus {
     
-    private final HashMap<Class<CalculatorCommand>, Class<CalculatorCommandHandler>> handlers =  new HashMap<>();
+    private final HashMap<Class<? extends Command>, CommandHandler> handlers =  new HashMap<>();
+    
 
-    public void subscribe(Class<CalculatorCommand> calculatorCommandClass, Class<CalculatorCommandHandler> calculatorCommandHandlerClass) {
-        this.handlers.put(calculatorCommandClass, calculatorCommandHandlerClass);
+    public void subscribe(CommandHandler commandHandler, Class<? extends Command> command ){
+        this.handlers.put(command, commandHandler);
     }
 
+    public void route(Command command) {
+        var handler = this.handlers.get(command.getClass());
+        
+        handler.handle(command);
+    }
 }
